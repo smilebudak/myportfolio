@@ -2,14 +2,14 @@
 
 @theme {
   /* SHADCN / MINIMALIST MONOCHROME PALETTE (Zinc Based) */
-  --color-cyber-black: #09090b;
-  --color-cyber-dark: #18181b;
-  --color-cyber-gray: #27272a;
-  --color-cyber-text: #fafafa;
-  --color-cyber-muted: #a1a1aa;
+  --color-cyber-black: #F5E6D3;
+  --color-cyber-dark: #E8D5C4;
+  --color-cyber-gray: #D4C4B0;
+  --color-cyber-text: #1a1a1a;
+  --color-cyber-muted: #6b6b6b;
   
-  --color-background: #09090b;
-  --color-foreground: #fafafa;
+  --color-background: #F5E6D3;
+  --color-foreground: #1a1a1a;
   
   --color-card: #09090b;
   --color-card-foreground: #fafafa;
@@ -35,15 +35,15 @@
 }
 
 :root {
-  color-scheme: dark;
-  --color-background: #09090b;
-  --color-foreground: #fafafa;
+  color-scheme: light;
+  --color-background: #F5E6D3;
+  --color-foreground: #1a1a1a;
   scroll-behavior: smooth;
   scroll-padding-top: 100px;
 }
 
 html {
-  background-color: #09090b;
+  background-color: #F5E6D3;
 }
 
 * {

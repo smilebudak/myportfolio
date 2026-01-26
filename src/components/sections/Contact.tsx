@@ -1,23 +1,15 @@
 import { useState, useRef, useEffect } from 'react';
 import { resumeData } from '../../data/resume';
 import { Mail, Linkedin, Github, Send, CheckCircle, Loader2, AlertCircle, ArrowUpRight, Copy, Check, Instagram } from 'lucide-react';
+import { useLanguage } from '../../contexts/LanguageContext';
 
-const XIcon = ({ className }: { className?: string }) => (
-  <svg 
-    viewBox="0 0 24 24" 
-    aria-hidden="true" 
-    className={className} 
-    fill="currentColor"
-  >
-    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-  </svg>
-);
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export const Contact = () => {
+  const { t } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const [formState, setFormState] = useState({
@@ -27,6 +19,37 @@ export const Contact = () => {
   });
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
   const [copied, setCopied] = useState(false);
+  const [touchText, setTouchText] = useState('touch');
+
+  const scrambleText = (finalText: string) => {
+    let iterations = 0;
+    const interval = setInterval(() => {
+      setTouchText(
+        finalText
+          .split("")
+          .map((_letter, index) => {
+            if (index < iterations) {
+              return finalText[index];
+            }
+            return "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[Math.floor(Math.random() * 26)];
+          })
+          .join("")
+      );
+
+      if (iterations >= finalText.length) {
+        clearInterval(interval);
+      }
+
+      iterations += 1 / 3;
+    }, 30);
+  };
+
+  useEffect(() => {
+    // Initial scramble
+    const touchText = t('contact.touch');
+    setTouchText(touchText);
+    scrambleText(touchText);
+  }, [t]);
 
   useEffect(() => {
     if (typeof window !== 'undefined' && typeof window.matchMedia === 'function') {
@@ -65,7 +88,7 @@ export const Contact = () => {
     setStatus('sending');
     
     try {
-      const response = await fetch("https://formspree.io/f/xanrbbpb", {
+      const response = await fetch("https://formspree.io/f/mvzabzzg", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -108,29 +131,22 @@ export const Contact = () => {
     { 
       icon: Linkedin, 
       label: 'LinkedIn', 
-      value: 'Connect with me',
+      value: t('contact.connectWithMe'),
       href: resumeData.personal.linkedin,
-      color: '#0A66C2' // Keep brand color or change to white? Let's keep brand for recognition or white for strict minimalism. White.
-    },
-    { 
-      icon: XIcon, 
-      label: 'X (Twitter)', 
-      value: 'Follow me',
-      href: resumeData.personal.x,
-      color: '#ffffff'
+      color: '#0A66C2'
     },
     { 
       icon: Instagram, 
       label: 'Instagram', 
-      value: 'Follow me',
+      value: t('contact.followMe'),
       href: resumeData.personal.instagram,
       color: '#E1306C'
     },
     { 
       icon: Github, 
       label: 'GitHub', 
-      value: 'View my code',
-      href: 'https://github.com/kushwahaamar-dev',
+      value: t('contact.viewMyCode'),
+      href: 'https://github.com/smilebudak',
       color: '#ffffff'
     }
   ];
@@ -141,15 +157,20 @@ export const Contact = () => {
         
         {/* Section Header */}
         <div className="contact-fade text-center mb-20">
-          <p className="text-zinc-400 font-mono text-sm tracking-widest uppercase mb-6">
-            Contact
+          <p className="text-gray-700 font-mono text-sm tracking-widest uppercase mb-6">
+            {t('contact.title')}
           </p>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-            Get in
-            <span className="text-gradient"> touch</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+            {t('contact.heading')}{' '}
+            <span 
+              className="text-gray-900 min-w-[5ch] inline-block cursor-default"
+              onMouseEnter={() => scrambleText(t('contact.touch'))}
+            >
+              {touchText}
+            </span>
           </h2>
-          <p className="text-xl text-zinc-400 max-w-2xl mx-auto">
-            Internships, research opportunities, or interesting projects — I'm listening.
+          <p className="text-xl text-gray-700 max-w-2xl mx-auto">
+            {t('contact.subtitle')}
           </p>
         </div>
 
@@ -158,24 +179,24 @@ export const Contact = () => {
           {/* Left Column - Contact Info */}
           <div className="space-y-6">
             {/* Email Card - Prominent */}
-            <div className="contact-fade p-8 rounded-2xl border border-zinc-800 bg-[#09090b]">
-              <p className="text-sm text-zinc-400 mb-2">Reach me directly at</p>
+            <div className="contact-fade p-8 rounded-2xl border border-gray-300 bg-white/80">
+              <p className="text-sm text-gray-700 mb-2">{t('contact.reachMe')}</p>
               <div className="flex items-center justify-between gap-4">
                 <a 
                   href={`mailto:${resumeData.personal.email}`}
-                  className="text-lg md:text-xl font-medium text-white hover:text-zinc-300 transition-colors truncate"
+                  className="text-lg md:text-xl font-medium text-gray-900 hover:text-gray-800 transition-colors truncate"
                 >
                   {resumeData.personal.email}
                 </a>
                 <button 
                   onClick={copyEmail}
-                  className="p-2 rounded-lg bg-zinc-900 hover:bg-zinc-800 transition-colors shrink-0 border border-zinc-800"
-                  title="Copy email"
+                  className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors shrink-0 border border-gray-300"
+                  title={t('contact.copyEmail')}
                 >
                   {copied ? (
-                    <Check className="w-4 h-4 text-white" />
+                    <Check className="w-4 h-4 text-gray-900" />
                   ) : (
-                    <Copy className="w-4 h-4 text-zinc-400" />
+                    <Copy className="w-4 h-4 text-gray-700" />
                   )}
                 </button>
               </div>
@@ -189,30 +210,30 @@ export const Contact = () => {
                   href={link.href}
                   target={link.label !== 'Email' ? '_blank' : undefined}
                   rel={link.label !== 'Email' ? 'noopener noreferrer' : undefined}
-                  className="group flex items-center justify-between p-5 rounded-xl border border-zinc-800 bg-[#09090b] hover:border-zinc-600 transition-all"
+                  className="group flex items-center justify-between p-5 rounded-xl border border-gray-300 bg-white/80 hover:border-gray-400 transition-all"
                 >
                   <div className="flex items-center gap-4">
                     <div 
-                      className="p-3 rounded-lg bg-zinc-900 border border-zinc-800"
+                      className="p-3 rounded-lg bg-gray-100 border border-gray-300"
                     >
-                      <link.icon className="w-5 h-5 text-white" />
+                      <link.icon className="w-5 h-5 text-gray-900" />
                     </div>
                     <div>
-                      <p className="font-medium text-white group-hover:text-zinc-200 transition-colors">
+                      <p className="font-medium text-gray-900 group-hover:text-gray-800 transition-colors">
                         {link.label}
                       </p>
-                      <p className="text-sm text-zinc-500">{link.value}</p>
+                      <p className="text-sm text-gray-700">{link.value}</p>
                     </div>
                   </div>
-                  <ArrowUpRight className="w-4 h-4 text-zinc-600 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                  <ArrowUpRight className="w-4 h-4 text-gray-600 group-hover:text-gray-900 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
                 </a>
               ))}
             </div>
 
             {/* Location */}
-            <div className="contact-fade p-6 rounded-xl border border-zinc-800 bg-[#09090b]">
-              <p className="text-sm text-zinc-500 mb-1">Based in</p>
-              <p className="text-white font-medium">{resumeData.personal.location}</p>
+            <div className="contact-fade p-6 rounded-xl border border-gray-300 bg-white/80">
+              <p className="text-sm text-gray-700 mb-1">{t('contact.basedIn')}</p>
+              <p className="text-gray-900 font-medium">{resumeData.personal.location}</p>
             </div>
           </div>
 
@@ -222,15 +243,15 @@ export const Contact = () => {
             onSubmit={handleSubmit}
             action="#"
             method="POST" 
-            className="contact-fade p-8 md:p-10 rounded-2xl border border-zinc-800 bg-[#09090b]"
+            className="contact-fade p-8 md:p-10 rounded-2xl border border-gray-300 bg-white/80"
           >
-            <h3 className="text-2xl font-bold text-white mb-8">Send a message</h3>
+            <h3 className="text-2xl font-bold text-gray-900 mb-8">{t('contact.sendMessage')}</h3>
             
             <div className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-zinc-400 mb-3">
-                    Your Name
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-3">
+                    {t('contact.name')}
                   </label>
                   <input 
                     type="text"
@@ -239,14 +260,14 @@ export const Contact = () => {
                     value={formState.name}
                     onChange={handleChange}
                     required 
-                    className="w-full px-5 py-4 rounded-xl bg-zinc-900/50 border border-zinc-800 text-white placeholder-zinc-600 outline-none transition-all duration-300 focus:border-white focus:ring-1 focus:ring-white focus:bg-zinc-900"
-                    placeholder="John Doe"
+                    className="w-full px-5 py-4 rounded-xl bg-gray-100/50 border border-gray-300 text-gray-900 placeholder-gray-500 outline-none transition-all duration-300 focus:border-gray-900 focus:ring-1 focus:ring-gray-900 focus:bg-gray-100"
+                    placeholder={t('contact.namePlaceholder')}
                   />
                 </div>
                 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-zinc-400 mb-3">
-                    Your Email
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-3">
+                    {t('contact.email')}
                   </label>
                   <input 
                     type="email"
@@ -255,15 +276,15 @@ export const Contact = () => {
                     value={formState.email}
                     onChange={handleChange}
                     required 
-                    className="w-full px-5 py-4 rounded-xl bg-zinc-900/50 border border-zinc-800 text-white placeholder-zinc-600 outline-none transition-all duration-300 focus:border-white focus:ring-1 focus:ring-white focus:bg-zinc-900"
-                    placeholder="john@example.com"
+                    className="w-full px-5 py-4 rounded-xl bg-gray-100/50 border border-gray-300 text-gray-900 placeholder-gray-500 outline-none transition-all duration-300 focus:border-gray-900 focus:ring-1 focus:ring-gray-900 focus:bg-gray-100"
+                    placeholder={t('contact.emailPlaceholder')}
                   />
                 </div>
               </div>
               
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-zinc-400 mb-3">
-                  Your Message
+                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-3">
+                  {t('contact.message')}
                 </label>
                 <textarea 
                   id="message"
@@ -272,8 +293,8 @@ export const Contact = () => {
                   value={formState.message}
                   onChange={handleChange}
                   required
-                  className="w-full px-5 py-4 rounded-xl bg-zinc-900/50 border border-zinc-800 text-white placeholder-zinc-600 outline-none transition-all duration-300 resize-none focus:border-white focus:ring-1 focus:ring-white focus:bg-zinc-900"
-                  placeholder="Tell me about your project..."
+                  className="w-full px-5 py-4 rounded-xl bg-gray-100/50 border border-gray-300 text-gray-900 placeholder-gray-500 outline-none transition-all duration-300 resize-none focus:border-gray-900 focus:ring-1 focus:ring-gray-900 focus:bg-gray-100"
+                  placeholder={t('contact.messagePlaceholder')}
                 />
               </div>
 
@@ -282,32 +303,32 @@ export const Contact = () => {
                 disabled={status === 'sending' || status === 'success'}
                 className={`w-full flex items-center justify-center gap-3 px-8 py-4 font-semibold rounded-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed ${
                   status === 'error' 
-                    ? 'bg-red-500 hover:bg-red-600 text-white' 
+                    ? 'bg-red-500 hover:bg-red-600 text-gray-900' 
                     : 'bg-white hover:bg-zinc-200 text-black'
                 }`}
               >
                 {status === 'idle' && (
                   <>
-                    <span>Send Message</span>
+                    <span>{t('contact.sendMessage')}</span>
                     <Send className="w-5 h-5" />
                   </>
                 )}
                 {status === 'sending' && (
                   <>
                     <Loader2 className="w-5 h-5 animate-spin" />
-                    <span>Sending...</span>
+                    <span>{t('contact.sending')}</span>
                   </>
                 )}
                 {status === 'success' && (
                   <>
                     <CheckCircle className="w-5 h-5" />
-                    <span>Message Sent!</span>
+                    <span>{t('contact.success')}</span>
                   </>
                 )}
                 {status === 'error' && (
                   <>
                     <AlertCircle className="w-5 h-5" />
-                    <span>Try Again</span>
+                    <span>{t('contact.tryAgain')}</span>
                   </>
                 )}
               </button>

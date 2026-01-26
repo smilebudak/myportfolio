@@ -9,20 +9,11 @@ import { Experience } from './components/sections/Experience';
 import { Contact } from './components/sections/Contact';
 import { CustomCursor } from './components/ui/CustomCursor';
 import { ArrowUp, Github, Linkedin, Mail, Instagram } from 'lucide-react';
-
-const XIcon = ({ className }: { className?: string }) => (
-  <svg 
-    viewBox="0 0 24 24" 
-    aria-hidden="true" 
-    className={className} 
-    fill="currentColor"
-  >
-    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-  </svg>
-);
 import { resumeData } from './data/resume';
+import { useLanguage } from './contexts/LanguageContext';
 
 function App() {
+  const { t } = useLanguage();
   const [showBackToTop, setShowBackToTop] = useState(false);
   const scrollProgressRef = useRef<HTMLDivElement>(null);
   const lastShowRef = useRef(false);
@@ -94,32 +85,36 @@ function App() {
             <div className="grid md:grid-cols-3 gap-12 mb-12">
               {/* Brand */}
               <div>
-                <h3 className="text-2xl font-bold text-white mb-4">
-                  Amar<span className="text-gradient">.</span>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                  {t('footer.portfolio')}<span className="text-gradient">.</span>
                 </h3>
-                <p className="text-gray-500 leading-relaxed">
-                  Computer Science Engineer & AI Researcher building 
-                  the future of human-computer interaction.
+                <p className="text-gray-700 leading-relaxed">
+                  {t('footer.description')}
                 </p>
               </div>
 
               {/* Quick Links */}
               <div>
-                <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">
-                  Quick Links
+                <h4 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-4">
+                  {t('footer.quickLinks')}
                 </h4>
                 <ul className="space-y-3">
-                  {['About', 'Skills', 'Projects', 'Contact'].map((item) => (
-                    <li key={item}>
+                  {[
+                    { key: 'nav.about', href: 'about' },
+                    { key: 'nav.skills', href: 'skills' },
+                    { key: 'nav.projects', href: 'projects' },
+                    { key: 'nav.contact', href: 'contact' }
+                  ].map((item) => (
+                    <li key={item.href}>
                       <a 
-                        href={`#${item.toLowerCase()}`}
+                        href={`#${item.href}`}
                         onClick={(e) => {
                           e.preventDefault();
-                          document.querySelector(`#${item.toLowerCase()}`)?.scrollIntoView({ behavior: 'smooth' });
+                          document.querySelector(`#${item.href}`)?.scrollIntoView({ behavior: 'smooth' });
                         }}
-                        className="text-gray-500 hover:text-white transition-colors link-underline"
+                        className="text-gray-700 hover:text-gray-900 transition-colors link-underline"
                       >
-                        {item}
+                        {t(item.key)}
                       </a>
                     </li>
                   ))}
@@ -128,13 +123,13 @@ function App() {
 
               {/* Connect */}
       <div>
-                <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">
-                  Connect
+                <h4 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-4">
+                  {t('footer.connect')}
                 </h4>
                 <div className="flex gap-4">
                   <a 
                     href={`mailto:${resumeData.personal.email}`}
-                    className="p-3 rounded-lg bg-white/5 text-gray-400 hover:text-neon-blue hover:bg-neon-blue/10 transition-all"
+                    className="p-3 rounded-lg bg-white/5 text-gray-600 hover:text-neon-blue hover:bg-neon-blue/10 transition-all"
                     title="Email"
                   >
                     <Mail className="w-5 h-5" />
@@ -143,34 +138,25 @@ function App() {
                     href={resumeData.personal.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-3 rounded-lg bg-white/5 text-gray-400 hover:text-[#0A66C2] hover:bg-[#0A66C2]/10 transition-all"
+                    className="p-3 rounded-lg bg-white/5 text-gray-600 hover:text-[#0A66C2] hover:bg-[#0A66C2]/10 transition-all"
                     title="LinkedIn"
                   >
                     <Linkedin className="w-5 h-5" />
         </a>
                   <a 
-                    href={resumeData.personal.x}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-3 rounded-lg bg-white/5 text-gray-400 hover:text-white hover:bg-white/10 transition-all"
-                    title="X (Twitter)"
-                  >
-                    <XIcon className="w-5 h-5" />
-                  </a>
-                  <a 
                     href={resumeData.personal.instagram}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-3 rounded-lg bg-white/5 text-gray-400 hover:text-[#E1306C] hover:bg-[#E1306C]/10 transition-all"
+                    className="p-3 rounded-lg bg-white/5 text-gray-600 hover:text-[#E1306C] hover:bg-[#E1306C]/10 transition-all"
                     title="Instagram"
                   >
                     <Instagram className="w-5 h-5" />
                   </a>
                   <a 
-                    href="https://github.com/kushwahaamar-dev"
+                    href="https://github.com/smilebudak"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-3 rounded-lg bg-white/5 text-gray-400 hover:text-white hover:bg-white/10 transition-all"
+                    className="p-3 rounded-lg bg-white/5 text-gray-600 hover:text-gray-900 hover:bg-white/10 transition-all"
                     title="GitHub"
                   >
                     <Github className="w-5 h-5" />
@@ -182,10 +168,10 @@ function App() {
             {/* Bottom Bar */}
             <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
               <p className="text-gray-600 text-sm">
-                © {new Date().getFullYear()} Amar Kushwaha. All rights reserved.
+                {t('footer.copyright', { year: new Date().getFullYear() })}
               </p>
               <p className="text-gray-700 text-xs font-mono">
-                Designed & Built with React, Three.js & GSAP
+                {t('footer.builtWith')}
         </p>
       </div>
           </div>

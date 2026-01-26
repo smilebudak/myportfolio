@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
-import { ArrowDown, ArrowRight, Download, Activity, Cpu, MapPin, Globe } from 'lucide-react';
+import { ArrowDown, ArrowRight, Download } from 'lucide-react';
 import { resumeData } from '../../data/resume';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 export const Hero = () => {
+  const { t } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [nameText, setNameText] = useState(resumeData.personal.name.split(' ')[0]);
@@ -113,7 +115,7 @@ export const Hero = () => {
         style={{ transform: `translate(${mousePosition.x * 0.5}px, ${mousePosition.y * 0.5}px)` }}
       />
       <div
-        className="absolute bottom-1/4 -right-32 w-96 h-96 bg-zinc-500/5 rounded-full blur-[120px] transition-transform duration-1000"
+        className="absolute bottom-1/4 -right-32 w-96 h-96 bg-gray-400/5 rounded-full blur-[120px] transition-transform duration-1000"
         style={{ transform: `translate(${mousePosition.x * -0.5}px, ${mousePosition.y * -0.5}px)` }}
       />
 
@@ -126,55 +128,52 @@ export const Hero = () => {
             {/* Status indicator */}
             <div className="hero-line flex items-center gap-3 mb-8">
               <span className="relative flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-zinc-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-zinc-500"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
               </span>
-              <span className="text-sm font-mono text-zinc-500 tracking-wider">
-                Available for opportunities
+              <span className="text-sm font-mono text-green-400 tracking-wider">
+                {t('hero.available')}
               </span>
             </div>
 
             {/* Main heading - Large and impactful */}
-            <div className="space-y-2 mb-8">
+            <div className="mb-8">
               <div className="overflow-hidden">
                 <h1
                   className="hero-line text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter cursor-default"
                   onMouseEnter={() => scrambleText(resumeData.personal.name.split(' ')[0])}
                 >
-                  <span className="text-white">Hi, I'm </span>
-                  <span className="text-gradient min-w-[3ch] inline-block">{nameText}</span>
-                </h1>
-              </div>
-              <div className="overflow-hidden">
-                <h1 className="hero-line text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-white">
-                  {resumeData.personal.name.split(' ')[1]}
-                  <span className="text-gradient">.</span>
+                  <span className="text-gray-900">{t('hero.greeting')} </span>
+                  <span className="text-gray-900 min-w-[3ch] inline-block">{nameText}</span>
+                  {' '}
+                  <span className="text-gray-900">{resumeData.personal.name.split(' ')[1]}</span>
+                  <span className="text-gray-900">.</span>
                 </h1>
               </div>
             </div>
 
             {/* Subtitle */}
-            <p className="hero-subtitle text-xl md:text-2xl text-zinc-400 max-w-2xl mb-12 leading-relaxed">
-              CS @ <span className="text-white font-medium">Sam Houston State</span> · Building
-              <span className="text-white"> Scalable Apps</span> · Research in
-              <span className="text-zinc-300"> Medical Imaging AI</span>
+            <p className="hero-subtitle text-xl md:text-2xl text-gray-700 max-w-2xl mb-12 leading-relaxed">
+              CS @ <span className="text-gray-900 font-medium">Sam Houston State</span> · Building
+              <span className="text-gray-900"> Scalable Apps</span> · Research in
+              <span className="text-gray-800"> Medical Imaging AI</span>
             </p>
 
             {/* CTA Buttons */}
             <div className="flex flex-wrap items-center gap-4">
               <button
                 onClick={scrollToProjects}
-                className="hero-cta btn-primary bg-white text-black hover:bg-zinc-200 border-none"
+                className="hero-cta btn-primary bg-gray-900 text-white hover:bg-gray-800 border-none"
               >
-                <span>View My Work</span>
+                <span>{t('hero.viewWork')}</span>
                 <ArrowRight className="w-5 h-5" />
               </button>
 
               <button
                 onClick={scrollToContact}
-                className="hero-cta btn-secondary border-zinc-700 text-white hover:bg-zinc-800 hover:border-zinc-600"
+                className="hero-cta inline-flex items-center gap-2 px-6 py-3 font-medium rounded-lg bg-white border border-gray-400 text-gray-900 hover:bg-white hover:border-gray-400 transition-all"
               >
-                <span>Get in Touch</span>
+                <span>{t('hero.getInTouch')}</span>
               </button>
 
               <a
@@ -182,77 +181,22 @@ export const Hero = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 download
-                className="hero-cta flex items-center gap-2 px-4 py-3 text-zinc-400 hover:text-white transition-colors"
+                className="hero-cta flex items-center gap-2 px-4 py-3 text-gray-600 hover:text-gray-900 transition-colors"
               >
                 <Download className="w-4 h-4" />
-                <span className="text-sm font-medium">Resume</span>
+                <span className="text-sm font-medium">{t('hero.resume')}</span>
               </a>
             </div>
           </div>
 
-          {/* Right side - Mission Control Panel */}
-          <div className="lg:col-span-4 hidden lg:block">
-            <div className="hero-cta relative group">
-              {/* Background Glow */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-white to-zinc-500 opacity-10 blur-lg group-hover:opacity-20 transition-opacity duration-500" />
-
-              <div className="relative p-6 rounded-2xl bg-[#09090b] border border-zinc-800 space-y-6">
-                {/* Header */}
-                <div className="flex items-center justify-between border-b border-zinc-800 pb-4">
-                  <div className="flex items-center gap-2 text-white">
-                    <Activity className="w-4 h-4" />
-                    <span className="text-xs font-mono font-bold tracking-widest">SYSTEM STATUS</span>
-                  </div>
-                  <div className="flex gap-1">
-                    <div className="w-2 h-2 rounded-full bg-zinc-400 animate-pulse" />
-                    <div className="w-2 h-2 rounded-full bg-zinc-800" />
-                    <div className="w-2 h-2 rounded-full bg-zinc-800" />
-                  </div>
-                </div>
-
-                {/* Current Task */}
-                <div>
-                  <p className="text-xs text-zinc-500 uppercase tracking-wider mb-2">Current Mission</p>
-                  <div className="flex items-center gap-3 text-white">
-                    <div className="p-2 rounded-lg bg-zinc-900 border border-zinc-800">
-                      <Cpu className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <p className="font-medium text-sm">Full-Stack Development</p>
-                      <p className="text-xs text-zinc-400">Go & React Apps</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Latest Commit / Activity */}
-                <div>
-                  <p className="text-xs text-zinc-500 uppercase tracking-wider mb-2">Latest Activity</p>
-                  <div className="p-3 rounded-lg bg-zinc-900 border border-zinc-800">
-                    <p className="font-mono text-xs text-zinc-400 mb-1">git commit -m</p>
-                    <p className="text-sm text-zinc-300">"feat: TaskFlow API with JWT auth complete"</p>
-                  </div>
-                </div>
-
-                {/* Location & Load */}
-                <div className="grid grid-cols-2 gap-4 pt-4 border-t border-zinc-800">
-                  <div>
-                    <div className="flex items-center gap-2 text-zinc-500 mb-1">
-                      <MapPin className="w-3 h-3" />
-                      <span className="text-xs">Location</span>
-                    </div>
-                    <p className="text-sm font-medium text-white">Huntsville, TX</p>
-                  </div>
-                  <div>
-                    <div className="flex items-center gap-2 text-zinc-500 mb-1">
-                      <Globe className="w-3 h-3" />
-                      <span className="text-xs">Focus</span>
-                    </div>
-                    <div className="w-full h-1.5 bg-zinc-800 rounded-full mt-1.5 overflow-hidden">
-                      <div className="h-full bg-white w-[98%] animate-pulse" />
-                    </div>
-                  </div>
-                </div>
-              </div>
+          {/* Right side - Profile Photo */}
+          <div className="lg:col-span-4 hidden lg:block flex items-center justify-center">
+            <div className="relative hero-cta">
+              <img 
+                src="/images/ismail.png" 
+                alt="Ismail Budak"
+                className="w-full h-full rounded-full object-cover aspect-square"
+              />
             </div>
           </div>
         </div>
@@ -260,9 +204,9 @@ export const Hero = () => {
 
       {/* Scroll indicator */}
       <div className="hero-scroll absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
-        <span className="text-xs font-mono text-gray-500 tracking-widest uppercase">Scroll</span>
-        <div className="w-6 h-10 rounded-full border border-gray-600 flex items-start justify-center p-2">
-          <ArrowDown className="w-3 h-3 text-gray-500 animate-bounce" />
+        <span className="text-xs font-mono text-gray-700 tracking-widest uppercase">{t('hero.scroll')}</span>
+        <div className="w-6 h-10 rounded-full border border-gray-400 flex items-start justify-center p-2">
+          <ArrowDown className="w-3 h-3 text-gray-700 animate-bounce" />
         </div>
       </div>
     </section>

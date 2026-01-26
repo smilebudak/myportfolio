@@ -9,13 +9,13 @@ export const HoloParticles = (props: ComponentProps<typeof Points>) => {
   // Keep this lightweight: compute once, fewer points.
   const sphere = useMemo(() => {
     const isMobile = typeof window !== 'undefined' && (window.innerWidth < 768 || window.matchMedia('(pointer: coarse)').matches);
-    const count = isMobile ? 300 : 2500; // Minimal particles on mobile for faster init
+    const count = isMobile ? 150 : 800; // Reduced particles for less distraction
     return inSphere(new Float32Array(count * 3), { radius: 1.5 }) as Float32Array;
   }, []);
 
   useFrame((_state, delta) => {
-    ref.current.rotation.x -= delta / 10;
-    ref.current.rotation.y -= delta / 15;
+    ref.current.rotation.x -= delta / 20;
+    ref.current.rotation.y -= delta / 25;
   });
 
   return (
@@ -24,10 +24,10 @@ export const HoloParticles = (props: ComponentProps<typeof Points>) => {
         <PointMaterial
           transparent
           color="#ffffff"
-          size={0.002}
+          size={0.0015}
           sizeAttenuation={true}
           depthWrite={false}
-          opacity={0.6}
+          opacity={0.25}
         />
       </Points>
     </group>

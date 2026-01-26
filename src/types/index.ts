@@ -4,7 +4,7 @@ export interface Project {
   tech: string[];
   link?: string;
   github?: string;
-  category: 'AI/ML' | 'Web3' | 'Full Stack' | 'Research' | 'DevSecOps';
+  category: 'AI/ML' | 'Web3' | 'Full Stack' | 'Research' | 'DevSecOps' | 'Mobile';
   featured: boolean;
 }
 
@@ -18,7 +18,7 @@ export interface Experience {
 export interface Skill {
   name: string;
   level: number; // 0-100
-  category: 'Languages' | 'AI/ML' | 'Web' | 'Tools';
+  category: 'Programming Languages' | 'Backend & Data' | 'Frontend & Mobile' | 'Cloud, DevOps & Systems' | 'Languages' | 'AI/ML' | 'Web' | 'Tools';
 }
 
 export interface ResumeData {

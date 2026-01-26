@@ -1,8 +1,10 @@
 import { useRef, useEffect } from 'react';
 import { resumeData } from '../../data/resume';
 import { Briefcase, Calendar, MapPin, ArrowUpRight } from 'lucide-react';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 export const Experience = () => {
+  const { t } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -71,15 +73,15 @@ export const Experience = () => {
         
         {/* Section Header */}
         <div className="exp-header text-center mb-20">
-          <p className="text-zinc-400 font-mono text-sm tracking-widest uppercase mb-6">
-            Career Path
+          <p className="text-gray-700 font-mono text-sm tracking-widest uppercase mb-6">
+            {t('experience.careerPath')}
           </p>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-            Experience & 
-            <span className="text-gradient"> Research</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+            {t('experience.title')} & 
+            <span className="text-gray-900"> {t('experience.researches')}</span>
           </h2>
-          <p className="text-xl text-zinc-400 max-w-2xl mx-auto">
-            My journey through cutting-edge research and development.
+          <p className="text-xl text-gray-700 max-w-2xl mx-auto">
+            {t('experience.description')}
           </p>
         </div>
 
@@ -87,7 +89,7 @@ export const Experience = () => {
         <div className="relative">
           {/* Timeline Line */}
           <div 
-            className="timeline-line absolute left-0 md:left-1/2 top-0 bottom-0 w-px md:-translate-x-1/2 bg-zinc-800"
+            className="timeline-line absolute left-0 md:left-1/2 top-0 bottom-0 w-px md:-translate-x-1/2 bg-gray-300"
           />
 
           <div className="space-y-12">
@@ -101,14 +103,14 @@ export const Experience = () => {
                 {/* Timeline Dot */}
                 <div className="absolute left-0 md:left-1/2 top-0 md:-translate-x-1/2 z-10">
                   <div 
-                    className="w-4 h-4 rounded-full border-2 border-zinc-600 bg-[#09090b]"
+                    className="w-4 h-4 rounded-full border-2 border-gray-400 bg-white/80"
                   />
                 </div>
 
                 {/* Date - Hidden on mobile, shown on desktop */}
                 <div className={`hidden md:flex items-start ${idx % 2 === 0 ? 'justify-end pr-12' : 'justify-start pl-12 md:order-2'}`}>
                   <div className="text-right">
-                    <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-400 font-mono text-sm">
+                    <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-100 border border-gray-300 text-gray-700 font-mono text-sm">
                       <Calendar className="w-4 h-4" />
                       {exp.period}
                     </span>
@@ -117,44 +119,44 @@ export const Experience = () => {
 
                 {/* Content Card */}
                 <div className={`pl-8 md:pl-0 ${idx % 2 === 0 ? 'md:pl-12' : 'md:pr-12 md:order-1'}`}>
-                  <div className="glass-card p-8 rounded-2xl group hover:border-zinc-600 transition-colors bg-[#09090b] border border-zinc-800">
+                  <div className="p-6 rounded-2xl bg-white/80 border border-gray-300 space-y-6">
                     {/* Mobile Date */}
-                    <div className="md:hidden flex items-center gap-2 text-zinc-400 font-mono text-sm mb-4">
+                    <div className="md:hidden flex items-center gap-2 text-gray-700 font-mono text-sm">
                       <Calendar className="w-4 h-4" />
                       {exp.period}
                     </div>
 
                     {/* Role & Company */}
-                    <div className="flex items-start gap-4 mb-4">
-                      <div className="p-3 rounded-xl bg-zinc-900 border border-zinc-800 shrink-0">
-                        <Briefcase className="w-5 h-5 text-white" />
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-bold text-white group-hover:text-zinc-200 transition-all">
-                          {exp.role}
-                        </h3>
-                        <div className="flex items-center gap-2 text-zinc-400 text-sm mt-1">
-                          <MapPin className="w-3 h-3" />
-                          <span>{exp.company}</span>
+                    <div>
+                      <p className="text-xs text-gray-700 uppercase tracking-wider mb-2">{t('experience.position')}</p>
+                      <div className="flex items-center gap-3 text-gray-900">
+                        <div className="p-2 rounded-lg bg-gray-100 border border-gray-300">
+                          <Briefcase className="w-5 h-5 text-gray-900" />
+                        </div>
+                        <div>
+                          <p className="font-medium text-sm text-gray-900">{exp.role}</p>
+                          <p className="text-xs text-gray-600">{exp.company}</p>
                         </div>
                       </div>
                     </div>
 
                     {/* Status Badge */}
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-900 text-zinc-300 border border-zinc-800 text-xs font-medium mb-6">
+                    <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-gray-800 text-white text-xs font-medium">
                       <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-                      Current Position
+                      {t('experience.currentPosition')}
                     </span>
 
                     {/* Description */}
-                    <ul className="space-y-3">
-                      {exp.description.map((item, i) => (
-                        <li key={i} className="flex gap-3 text-zinc-400 leading-relaxed">
-                          <ArrowUpRight className="w-4 h-4 text-zinc-500 shrink-0 mt-1" />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
+                    <div>
+                      <p className="text-xs text-gray-700 uppercase tracking-wider mb-2">{t('experience.responsibilities')}</p>
+                      <ul className="space-y-2">
+                        {exp.description.map((item, i) => (
+                          <li key={i} className="text-sm text-gray-800 leading-relaxed">
+                            {t(`experience.description.${exp.role.toLowerCase().replace(/[^a-z0-9]/g, '')}.${i}`) || item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>
