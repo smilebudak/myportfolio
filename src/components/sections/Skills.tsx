@@ -5,14 +5,11 @@ import { useLanguage } from '../../contexts/LanguageContext';
 import { 
   type LucideIcon, 
   Code2, 
-  Cpu, 
   Globe, 
-  Wrench,
   Code,
   Database,
   FileCode,
   Network,
-  Shield,
   Users,
   Brain,
   Cloud,
@@ -58,7 +55,6 @@ const getTechIcon = (name: string): LucideIcon | null => {
     'WebSockets': Network,
     'JWT Authentication': Lock,
     'System Design': Brain,
-    'Scalable Architectures': Brain,
     'AI Integration': Brain
   };
   

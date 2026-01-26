@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react';
 import { resumeData } from '../../data/resume';
-import { Briefcase, Calendar, MapPin, ArrowUpRight } from 'lucide-react';
+import { Briefcase, Calendar } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
 
 export const Experience = () => {
