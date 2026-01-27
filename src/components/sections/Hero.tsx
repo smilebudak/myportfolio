@@ -156,10 +156,10 @@ export const Hero = () => {
 
             {/* Main heading - Large and impactful */}
             <div className="mb-6 sm:mb-8">
-              <div className="overflow-hidden flex items-center gap-3 sm:gap-4">
-                <div className="flex-1">
+              <div className="overflow-hidden">
+                <div className="flex items-center gap-3 sm:gap-4">
                   <h1
-                    className="hero-line text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold tracking-tighter cursor-default leading-tight"
+                    className="hero-line text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold tracking-tighter cursor-default leading-tight flex-1"
                     onMouseEnter={() => scrambleText(resumeData.personal.name.split(' ')[0])}
                   >
                     <span className="text-gray-900">{t('hero.greeting')} </span>
@@ -168,16 +168,16 @@ export const Hero = () => {
                     <span className="text-gray-900">{resumeData.personal.name.split(' ')[1]}</span>
                     <span className="text-gray-900">.</span>
                   </h1>
-                </div>
-                
-                {/* Profile Photo - Inline with name on mobile */}
-                <div className="lg:hidden flex-shrink-0">
-                  <div className="relative w-20 h-20 sm:w-24 sm:h-24">
-                    <img 
-                      src="/images/ismail.png" 
-                      alt="Ismail Budak"
-                      className="w-full h-full rounded-full object-cover aspect-square border-3 border-gray-200 shadow-md"
-                    />
+                  
+                  {/* Profile Photo - Inline with name on mobile */}
+                  <div className="lg:hidden flex-shrink-0">
+                    <div className="relative w-20 h-20 sm:w-24 sm:h-24">
+                      <img 
+                        src="/images/ismail.png" 
+                        alt="Ismail Budak"
+                        className="w-full h-full rounded-full object-cover aspect-square border-2 sm:border-3 border-gray-200 shadow-md"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
