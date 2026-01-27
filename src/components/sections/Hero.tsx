@@ -158,7 +158,7 @@ export const Hero = () => {
             <div className="mb-6 sm:mb-8">
               <div className="overflow-hidden">
                 {/* Mobile: Photo on right, name inline */}
-                <div className="lg:hidden flex items-center gap-2 sm:gap-3 w-full">
+                <div className="lg:hidden flex items-center gap-2 sm:gap-3 justify-between w-full pr-0">
                   <h1
                     className="hero-line text-xl sm:text-2xl md:text-3xl font-bold tracking-tight cursor-default leading-tight flex-1 min-w-0 pr-2"
                     onMouseEnter={() => scrambleText(resumeData.personal.name.split(' ')[0])}
@@ -170,7 +170,7 @@ export const Hero = () => {
                     <span className="text-gray-900">.</span>
                   </h1>
                   
-                  <div className="flex-shrink-0 -mr-4 sm:-mr-6">
+                  <div className="flex-shrink-0">
                     <div className="relative w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20">
                       <img 
                         src="/images/ismail.png" 
