@@ -12,14 +12,23 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          // Split Three.js and related 3D libraries into separate chunks
-          'three-core': ['three'],
-          'three-fiber': ['@react-three/fiber'],
-          'three-drei': ['@react-three/drei'],
-          'three-postprocessing': ['@react-three/postprocessing', 'postprocessing'],
+          // Split large libraries into separate chunks for better caching
+          'vendor-react': ['react', 'react-dom'],
+          'vendor-gsap': ['gsap'],
+          'vendor-lenis': ['lenis'],
         },
       },
     },
-    chunkSizeWarningLimit: 750, // Three.js core is ~718kB, can't be split further
+    chunkSizeWarningLimit: 500,
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+    },
+  },
+  optimizeDeps: {
+    include: ['react', 'react-dom'],
   },
 })

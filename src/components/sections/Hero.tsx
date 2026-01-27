@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import gsap from 'gsap';
 import { ArrowDown, ArrowRight, Download } from 'lucide-react';
 import { resumeData } from '../../data/resume';
 import { useLanguage } from '../../contexts/LanguageContext';
@@ -68,32 +67,51 @@ export const Hero = () => {
   }, []);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+    // Lazy load GSAP for better initial load performance
+    let ctx: any = null;
+    let cancelled = false;
 
-      // Staggered reveal animation
-      tl.fromTo(".hero-line",
-        { y: 100, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1.2, stagger: 0.15 }
-      )
-        .fromTo(".hero-subtitle",
-          { y: 40, opacity: 0 },
-          { y: 0, opacity: 1, duration: 1 },
-          "-=0.6"
-        )
-        .fromTo(".hero-cta",
-          { y: 30, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.8, stagger: 0.1 },
-          "-=0.4"
-        )
-        .fromTo(".hero-scroll",
-          { opacity: 0 },
-          { opacity: 1, duration: 1 },
-          "-=0.2"
-        );
-    }, containerRef);
+    const initAnimation = async () => {
+      if (typeof window !== 'undefined' && typeof window.matchMedia === 'function') {
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduceMotion) return;
+      }
 
-    return () => ctx.revert();
+      const gsap = (await import('gsap')).default;
+      if (cancelled) return;
+
+      ctx = gsap.context(() => {
+        const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+
+        // Staggered reveal animation
+        tl.fromTo(".hero-line",
+          { y: 100, opacity: 0 },
+          { y: 0, opacity: 1, duration: 1.2, stagger: 0.15 }
+        )
+          .fromTo(".hero-subtitle",
+            { y: 40, opacity: 0 },
+            { y: 0, opacity: 1, duration: 1 },
+            "-=0.6"
+          )
+          .fromTo(".hero-cta",
+            { y: 30, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.8, stagger: 0.1 },
+            "-=0.4"
+          )
+          .fromTo(".hero-scroll",
+            { opacity: 0 },
+            { opacity: 1, duration: 1 },
+            "-=0.2"
+          );
+      }, containerRef);
+    };
+
+    initAnimation();
+
+    return () => {
+      cancelled = true;
+      if (ctx) ctx.revert();
+    };
   }, []);
 
   const scrollToProjects = () => {

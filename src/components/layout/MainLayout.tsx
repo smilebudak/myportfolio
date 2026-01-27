@@ -1,6 +1,5 @@
 import { type ReactNode, useEffect } from 'react';
 import { Navbar } from '../ui/Navbar';
-import Lenis from 'lenis';
 
 interface MainLayoutProps {
   children: ReactNode;
@@ -8,24 +7,42 @@ interface MainLayoutProps {
 
 export const MainLayout = ({ children }: MainLayoutProps) => {
   useEffect(() => {
-    // Initialize Lenis for smooth scrolling
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: 'vertical',
-      gestureOrientation: 'vertical',
-      smoothWheel: true,
-    });
+    // Lazy load Lenis for better initial load performance
+    let lenis: any = null;
+    let rafId: number | null = null;
 
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
+    const initLenis = async () => {
+      // Only load on non-mobile devices for better performance
+      if (typeof window !== 'undefined' && window.matchMedia('(pointer: fine)').matches) {
+        const LenisModule = await import('lenis');
+        const Lenis = LenisModule.default;
+        
+        lenis = new Lenis({
+          duration: 1.2,
+          easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          orientation: 'vertical',
+          gestureOrientation: 'vertical',
+          smoothWheel: true,
+        });
 
-    requestAnimationFrame(raf);
+        function raf(time: number) {
+          lenis.raf(time);
+          rafId = requestAnimationFrame(raf);
+        }
+
+        rafId = requestAnimationFrame(raf);
+      }
+    };
+
+    initLenis();
 
     return () => {
-      lenis.destroy();
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId);
+      }
+      if (lenis) {
+        lenis.destroy();
+      }
     };
   }, []);
 

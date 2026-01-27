@@ -3,11 +3,6 @@ import { resumeData } from '../../data/resume';
 import { Mail, Linkedin, Github, Send, CheckCircle, Loader2, AlertCircle, ArrowUpRight, Copy, Check, Instagram } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
 
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
-
 export const Contact = () => {
   const { t } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
@@ -58,21 +53,36 @@ export const Contact = () => {
       if (reduceMotion || coarsePointer) return;
     }
 
-    const ctx = gsap.context(() => {
-      gsap.from(".contact-fade", {
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 75%",
-        },
-        y: 40,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: "power3.out"
-      });
-    }, containerRef);
+    let ctx: any = null;
+    let cancelled = false;
 
-    return () => ctx.revert();
+    const initAnimation = async () => {
+      const gsap = (await import('gsap')).default;
+      const { ScrollTrigger } = await import('gsap/ScrollTrigger');
+      if (cancelled) return;
+
+      gsap.registerPlugin(ScrollTrigger);
+      ctx = gsap.context(() => {
+        gsap.from(".contact-fade", {
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 75%",
+          },
+          y: 40,
+          opacity: 0,
+          duration: 0.8,
+          stagger: 0.1,
+          ease: "power3.out"
+        });
+      }, containerRef);
+    };
+
+    initAnimation();
+
+    return () => {
+      cancelled = true;
+      if (ctx) ctx.revert();
+    };
   }, []);
 
   const copyEmail = () => {

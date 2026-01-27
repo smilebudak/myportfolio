@@ -1,38 +1,14 @@
 @import "tailwindcss";
 
 @theme {
-  /* SHADCN / MINIMALIST MONOCHROME PALETTE (Zinc Based) */
-  --color-cyber-black: #F5E6D3;
-  --color-cyber-dark: #E8D5C4;
-  --color-cyber-gray: #D4C4B0;
-  --color-cyber-text: #1a1a1a;
-  --color-cyber-muted: #6b6b6b;
-  
   --color-background: #F5E6D3;
   --color-foreground: #1a1a1a;
-  
-  --color-card: #09090b;
-  --color-card-foreground: #fafafa;
-  
-  --color-primary: #fafafa;
-  --color-primary-foreground: #18181b;
-  
-  --color-secondary: #27272a;
-  --color-secondary-foreground: #fafafa;
-  
-  --color-muted: #27272a;
-  --color-muted-foreground: #a1a1aa;
-  
-  --color-accent: #27272a;
-  --color-accent-foreground: #fafafa;
-  
   --color-border: #27272a;
-  --color-input: #27272a;
-  --color-ring: #d4d4d8;
 
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 }
+
 
 :root {
   color-scheme: light;
@@ -92,30 +68,6 @@ a, button {
   font-family: 'JetBrains Mono', 'Fira Code', monospace;
 }
 
-/* ============================================
-   BACKGROUND - Subtle Dot Pattern
-   ============================================ */
-.cyber-grid {
-  background-size: 24px 24px;
-  background-image: radial-gradient(circle, #27272a 1px, transparent 1px);
-  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
-  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
-  opacity: 0.3;
-}
-
-/* ============================================
-   SHADCN-STYLE CARDS
-   ============================================ */
-.glass-card {
-  background: #09090b; /* Solid background for contrast */
-  border: 1px solid var(--color-border);
-  transition: all 0.2s ease;
-}
-
-.glass-card:hover {
-  border-color: #52525b; /* Zinc-600 on hover */
-  background: #09090b;
-}
 
 /* ============================================
    SECTION SPACING
@@ -223,37 +175,11 @@ section {
   background: #d4d4d8;
 }
 
-.btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  background: transparent;
-  border: 1px solid #27272a;
-  color: #fafafa;
-  font-weight: 500;
-  border-radius: 0.5rem;
-  transition: all 0.2s;
-}
-
-.btn-secondary:hover {
-  background: #27272a;
-  border-color: #52525b;
-}
-
 /* ============================================
    TEXT GRADIENT - Subtle Silver
    ============================================ */
 .text-gradient {
   background: linear-gradient(to bottom right, #ffffff 30%, #a1a1aa);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.text-gradient-orange {
-  /* Reusing subtle gradient for consistency */
-  background: linear-gradient(to bottom right, #e4e4e7 30%, #71717a);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -283,24 +209,6 @@ section {
 .link-underline:hover::after {
   transform: scaleX(1);
   transform-origin: bottom left;
-  }
-
-/* Marquee */
-.marquee-container {
-  overflow: hidden;
-  white-space: nowrap;
-  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-}
-
-.marquee-content {
-  display: inline-flex;
-  animation: marquee 40s linear infinite;
-}
-
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
 }
 
 /* Hide cursor on touch */
