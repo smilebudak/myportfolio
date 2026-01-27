@@ -157,20 +157,23 @@ export const Hero = () => {
             {/* Main heading - Large and impactful */}
             <div className="mb-6 sm:mb-8">
               <div className="overflow-hidden">
-                {/* Mobile: Photo on right, name inline */}
-                <div className="lg:hidden flex items-center gap-2 sm:gap-3 justify-between w-full pr-0">
-                  <h1
-                    className="hero-line text-xl sm:text-2xl md:text-3xl font-bold tracking-tight cursor-default leading-tight flex-1 min-w-0 pr-2"
-                    onMouseEnter={() => scrambleText(resumeData.personal.name.split(' ')[0])}
-                  >
-                    <span className="text-gray-900">{t('hero.greeting')} </span>
-                    <span className="text-gray-900 min-w-[3ch] inline-block">{nameText}</span>
-                    {' '}
-                    <span className="text-gray-900">{resumeData.personal.name.split(' ')[1]}</span>
-                    <span className="text-gray-900">.</span>
-                  </h1>
+                {/* Mobile: Photo on right edge, name inline */}
+                <div className="lg:hidden relative w-full">
+                  <div className="flex items-center gap-2 sm:gap-3 pr-0">
+                    <h1
+                      className="hero-line text-xl sm:text-2xl md:text-3xl font-bold tracking-tight cursor-default leading-tight flex-1 min-w-0 pr-2"
+                      onMouseEnter={() => scrambleText(resumeData.personal.name.split(' ')[0])}
+                    >
+                      <span className="text-gray-900">{t('hero.greeting')} </span>
+                      <span className="text-gray-900 min-w-[3ch] inline-block">{nameText}</span>
+                      {' '}
+                      <span className="text-gray-900">{resumeData.personal.name.split(' ')[1]}</span>
+                      <span className="text-gray-900">.</span>
+                    </h1>
+                  </div>
                   
-                  <div className="flex-shrink-0">
+                  {/* Photo positioned at screen edge */}
+                  <div className="absolute right-0 top-0 flex-shrink-0 -mr-4 sm:-mr-6">
                     <div className="relative w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20">
                       <img 
                         src="/images/ismail.png" 
