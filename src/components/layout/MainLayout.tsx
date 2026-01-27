@@ -30,11 +30,11 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-[#F5E6D3] text-gray-900 overflow-hidden">
+    <div className="relative min-h-screen bg-[#F5E6D3] text-gray-900 overflow-x-hidden">
       {/* Content */}
       <div className="relative z-10">
         <Navbar />
-        <main>
+        <main className="w-full">
           {children}
         </main>
       </div>

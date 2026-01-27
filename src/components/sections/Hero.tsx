@@ -107,7 +107,7 @@ export const Hero = () => {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center overflow-x-hidden pt-16 sm:pt-20"
     >
       {/* Animated gradient orbs - Subtle Monochrome */}
       <div
@@ -120,7 +120,7 @@ export const Hero = () => {
       />
 
       {/* Main Content */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-8 sm:py-12">
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
 
           {/* Text Content */}
