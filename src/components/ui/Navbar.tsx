@@ -51,8 +51,8 @@ export const Navbar = () => {
         ? "bg-white/80 backdrop-blur-xl border-b border-gray-300/30" 
         : "bg-transparent"
     )}>
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="flex items-center justify-between h-20">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="flex items-center justify-between h-16 sm:h-20">
           
           {/* Logo */}
           <a 
@@ -60,8 +60,8 @@ export const Navbar = () => {
             className="flex items-center gap-3 group" 
             onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
           >
-            <div className="w-10 h-10 bg-gray-200/30 rounded-xl border border-gray-400/30 flex items-center justify-center group-hover:bg-gray-300/40 group-hover:border-gray-500/40 transition-all duration-300">
-              <Terminal className="w-5 h-5 text-gray-900" />
+            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gray-200/30 rounded-lg sm:rounded-xl border border-gray-400/30 flex items-center justify-center group-hover:bg-gray-300/40 group-hover:border-gray-500/40 transition-all duration-300">
+              <Terminal className="w-4 h-4 sm:w-5 sm:h-5 text-gray-900" />
             </div>
           </a>
           
@@ -109,20 +109,20 @@ export const Navbar = () => {
         "md:hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-xl border-b border-gray-300/30 transition-all duration-300 overflow-hidden",
         isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
       )}>
-        <div className="px-6 py-4 space-y-2">
+        <div className="px-4 sm:px-6 py-3 sm:py-4 space-y-2">
           {navItems.map((item) => (
             <a
               key={item.nameKey}
               href={item.href}
               className={clsx(
-                "flex items-center gap-3 px-4 py-3 rounded-xl text-base font-medium transition-all duration-300",
+                "flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl text-sm sm:text-base font-medium transition-all duration-300",
                 activeSection === item.href.substring(1)
                   ? "text-gray-900 bg-gray-200/50"
                   : "text-gray-600 hover:text-gray-900 hover:bg-gray-100/50"
               )}
               onClick={(e) => { e.preventDefault(); handleNavClick(item.href); }}
             >
-              <item.icon className="w-5 h-5" />
+              <item.icon className="w-4 h-4 sm:w-5 sm:h-5" />
               <span>{t(item.nameKey)}</span>
             </a>
           ))}
@@ -133,9 +133,9 @@ export const Navbar = () => {
               setLanguage(language === 'en' ? 'tr' : 'en');
               setIsOpen(false);
             }}
-            className="flex items-center gap-3 px-4 py-3 rounded-xl text-base font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100/50 transition-all duration-300 w-full"
+            className="flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl text-sm sm:text-base font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100/50 transition-all duration-300 w-full"
           >
-            <span className="text-xl">{language === 'en' ? '🇹🇷' : '🇬🇧'}</span>
+            <span className="text-lg sm:text-xl">{language === 'en' ? '🇹🇷' : '🇬🇧'}</span>
             <span>{language === 'en' ? 'Türkçe' : 'English'}</span>
           </button>
         </div>

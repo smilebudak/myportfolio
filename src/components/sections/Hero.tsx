@@ -120,27 +120,27 @@ export const Hero = () => {
       />
 
       {/* Main Content */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12">
-        <div className="grid lg:grid-cols-12 gap-12 items-center">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
 
           {/* Text Content */}
           <div className="lg:col-span-8">
             {/* Status indicator */}
-            <div className="hero-line flex items-center gap-3 mb-8">
+            <div className="hero-line flex items-center gap-3 mb-6 sm:mb-8">
               <span className="relative flex h-3 w-3">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
               </span>
-              <span className="text-sm font-mono text-green-400 tracking-wider">
+              <span className="text-xs sm:text-sm font-mono text-green-400 tracking-wider">
                 {t('hero.available')}
               </span>
             </div>
 
             {/* Main heading - Large and impactful */}
-            <div className="mb-8">
+            <div className="mb-6 sm:mb-8">
               <div className="overflow-hidden">
                 <h1
-                  className="hero-line text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter cursor-default"
+                  className="hero-line text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold tracking-tighter cursor-default leading-tight"
                   onMouseEnter={() => scrambleText(resumeData.personal.name.split(' ')[0])}
                 >
                   <span className="text-gray-900">{t('hero.greeting')} </span>
@@ -153,25 +153,25 @@ export const Hero = () => {
             </div>
 
             {/* Subtitle */}
-            <p className="hero-subtitle text-xl md:text-2xl text-gray-700 max-w-2xl mb-12 leading-relaxed">
+            <p className="hero-subtitle text-base sm:text-lg md:text-xl lg:text-2xl text-gray-700 max-w-2xl mb-8 sm:mb-12 leading-relaxed">
               CS @ <span className="text-gray-900 font-medium">Sam Houston State</span> · Building
               <span className="text-gray-900"> Scalable Apps</span> · Research in
               <span className="text-gray-800"> Medical Imaging AI</span>
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-wrap items-center gap-4">
+            <div className="flex flex-wrap items-center gap-3 sm:gap-4">
               <button
                 onClick={scrollToProjects}
-                className="hero-cta btn-primary bg-gray-900 text-white hover:bg-gray-800 border-none"
+                className="hero-cta btn-primary bg-gray-900 text-white hover:bg-gray-800 border-none text-sm sm:text-base px-4 sm:px-6 py-2.5 sm:py-3"
               >
                 <span>{t('hero.viewWork')}</span>
-                <ArrowRight className="w-5 h-5" />
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
 
               <button
                 onClick={scrollToContact}
-                className="hero-cta inline-flex items-center gap-2 px-6 py-3 font-medium rounded-lg bg-white border border-gray-400 text-gray-900 hover:bg-white hover:border-gray-400 transition-all"
+                className="hero-cta inline-flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 font-medium rounded-lg bg-white border border-gray-400 text-gray-900 hover:bg-white hover:border-gray-400 transition-all text-sm sm:text-base"
               >
                 <span>{t('hero.getInTouch')}</span>
               </button>
@@ -181,10 +181,10 @@ export const Hero = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 download
-                className="hero-cta flex items-center gap-2 px-4 py-3 text-gray-600 hover:text-gray-900 transition-colors"
+                className="hero-cta flex items-center gap-2 px-3 sm:px-4 py-2.5 sm:py-3 text-gray-600 hover:text-gray-900 transition-colors"
               >
-                <Download className="w-4 h-4" />
-                <span className="text-sm font-medium">{t('hero.resume')}</span>
+                <Download className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                <span className="text-xs sm:text-sm font-medium">{t('hero.resume')}</span>
               </a>
             </div>
           </div>
@@ -203,10 +203,10 @@ export const Hero = () => {
       </div>
 
       {/* Scroll indicator */}
-      <div className="hero-scroll absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
-        <span className="text-xs font-mono text-gray-700 tracking-widest uppercase">{t('hero.scroll')}</span>
-        <div className="w-6 h-10 rounded-full border border-gray-400 flex items-start justify-center p-2">
-          <ArrowDown className="w-3 h-3 text-gray-700 animate-bounce" />
+      <div className="hero-scroll absolute bottom-6 sm:bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 sm:gap-3">
+        <span className="text-[10px] sm:text-xs font-mono text-gray-700 tracking-widest uppercase">{t('hero.scroll')}</span>
+        <div className="w-5 h-8 sm:w-6 sm:h-10 rounded-full border border-gray-400 flex items-start justify-center p-1.5 sm:p-2">
+          <ArrowDown className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-gray-700 animate-bounce" />
         </div>
       </div>
     </section>

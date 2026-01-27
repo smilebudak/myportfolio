@@ -156,14 +156,14 @@ export const Skills = () => {
 
   return (
     <section id="skills" ref={containerRef} className="relative">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
         
         {/* Header */}
-        <div className="skill-header mb-20 md:text-center max-w-3xl mx-auto">
-          <p className="text-gray-700 font-mono text-sm tracking-widest uppercase mb-4">
+        <div className="skill-header mb-12 sm:mb-16 lg:mb-20 md:text-center max-w-3xl mx-auto">
+          <p className="text-gray-700 font-mono text-xs sm:text-sm tracking-widest uppercase mb-3 sm:mb-4">
             {t('skills.title')}
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
             {t('skills.heading')}{' '}
             <span 
               className="text-gray-900 min-w-[3ch] inline-block cursor-default"
@@ -172,13 +172,13 @@ export const Skills = () => {
               {useText}
             </span>
           </h2>
-          <p className="text-xl text-gray-700 leading-relaxed">
+          <p className="text-base sm:text-lg lg:text-xl text-gray-700 leading-relaxed">
             {t('skills.description')}
           </p>
         </div>
 
         {/* Tech Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {Object.entries(categories).map(([category, skills]) => {
             const config = categoryConfig[category] || { icon: Code2, color: '#fff', label: category };
             const Icon = config.icon;
@@ -186,35 +186,35 @@ export const Skills = () => {
             return (
               <div key={category} className="tech-group flex flex-col h-full">
                 {/* Category Title */}
-                <div className="flex items-center gap-3 mb-6 pb-4 border-b border-gray-300">
-                  <Icon className="w-5 h-5 text-gray-900" />
-                  <h3 className="text-lg font-bold text-gray-900">{config.label}</h3>
+                <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6 pb-3 sm:pb-4 border-b border-gray-300">
+                  <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-gray-900" />
+                  <h3 className="text-base sm:text-lg font-bold text-gray-900">{config.label}</h3>
                 </div>
 
                 {/* Skills List */}
-                <div className="flex flex-col gap-3">
+                <div className="flex flex-col gap-2 sm:gap-3">
                   {skills.map((skill) => {
                     const TechIcon = getTechIcon(skill.name);
                     return (
                       <div 
                         key={skill.name}
-                        className="group flex items-center justify-between p-4 rounded-xl bg-gray-100/50 hover:bg-gray-100 border border-gray-300 hover:border-gray-400 transition-all duration-300"
+                        className="group flex items-center justify-between p-3 sm:p-4 rounded-lg sm:rounded-xl bg-gray-100/50 hover:bg-gray-100 border border-gray-300 hover:border-gray-400 transition-all duration-300"
                       >
-                        <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
                           {TechIcon && (
-                            <TechIcon className="w-5 h-5 text-gray-700 group-hover:text-gray-900 transition-colors flex-shrink-0" />
+                            <TechIcon className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700 group-hover:text-gray-900 transition-colors flex-shrink-0" />
                           )}
-                          <span className="font-medium text-gray-800 group-hover:text-gray-900 transition-colors">
+                          <span className="font-medium text-sm sm:text-base text-gray-800 group-hover:text-gray-900 transition-colors truncate">
                             {skill.name}
                           </span>
                         </div>
                         
                         {/* Minimal proficiency dot indicator instead of bar */}
-                        <div className="flex gap-1">
+                        <div className="flex gap-0.5 sm:gap-1 flex-shrink-0 ml-2">
                           {[...Array(5)].map((_, i) => (
                             <div 
                               key={i}
-                              className={`w-1 h-1 rounded-full transition-colors duration-300 ${
+                              className={`w-0.5 h-0.5 sm:w-1 sm:h-1 rounded-full transition-colors duration-300 ${
                                 i < Math.floor(skill.level / 20) 
                                   ? 'bg-gray-900 opacity-100' 
                                   : 'bg-gray-300 opacity-50'
@@ -232,8 +232,8 @@ export const Skills = () => {
         </div>
         
         {/* Footer Note */}
-        <div className="skill-header mt-20 text-center">
-           <p className="text-sm font-mono text-gray-700">
+        <div className="skill-header mt-12 sm:mt-16 lg:mt-20 text-center">
+           <p className="text-xs sm:text-sm font-mono text-gray-700">
              {t('skills.alwaysLearning')}
            </p>
         </div>

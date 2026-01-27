@@ -80,25 +80,25 @@ function App() {
         <Contact />
         
         {/* Footer */}
-        <footer className="py-16 border-t border-white/5">
-          <div className="max-w-7xl mx-auto px-6 lg:px-12">
-            <div className="grid md:grid-cols-3 gap-12 mb-12">
+        <footer className="py-10 sm:py-12 lg:py-16 border-t border-white/5">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-10 lg:gap-12 mb-8 sm:mb-10 lg:mb-12">
               {/* Brand */}
               <div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">
                   {t('footer.portfolio')}<span className="text-gradient">.</span>
                 </h3>
-                <p className="text-gray-700 leading-relaxed">
+                <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
                   {t('footer.description')}
                 </p>
               </div>
 
               {/* Quick Links */}
               <div>
-                <h4 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-4">
+                <h4 className="text-xs sm:text-sm font-semibold text-gray-900 uppercase tracking-wider mb-3 sm:mb-4">
                   {t('footer.quickLinks')}
                 </h4>
-                <ul className="space-y-3">
+                <ul className="space-y-2 sm:space-y-3">
                   {[
                     { key: 'nav.about', href: 'about' },
                     { key: 'nav.skills', href: 'skills' },
@@ -112,7 +112,7 @@ function App() {
                           e.preventDefault();
                           document.querySelector(`#${item.href}`)?.scrollIntoView({ behavior: 'smooth' });
                         }}
-                        className="text-gray-700 hover:text-gray-900 transition-colors link-underline"
+                        className="text-sm sm:text-base text-gray-700 hover:text-gray-900 transition-colors link-underline"
                       >
                         {t(item.key)}
                       </a>
@@ -122,58 +122,58 @@ function App() {
               </div>
 
               {/* Connect */}
-      <div>
-                <h4 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-4">
+              <div>
+                <h4 className="text-xs sm:text-sm font-semibold text-gray-900 uppercase tracking-wider mb-3 sm:mb-4">
                   {t('footer.connect')}
                 </h4>
-                <div className="flex gap-4">
+                <div className="flex gap-3 sm:gap-4">
                   <a 
                     href={`mailto:${resumeData.personal.email}`}
-                    className="p-3 rounded-lg bg-white/5 text-gray-600 hover:text-neon-blue hover:bg-neon-blue/10 transition-all"
+                    className="p-2.5 sm:p-3 rounded-lg bg-white/5 text-gray-600 hover:text-neon-blue hover:bg-neon-blue/10 transition-all"
                     title="Email"
                   >
-                    <Mail className="w-5 h-5" />
+                    <Mail className="w-4 h-4 sm:w-5 sm:h-5" />
                   </a>
                   <a 
                     href={resumeData.personal.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-3 rounded-lg bg-white/5 text-gray-600 hover:text-[#0A66C2] hover:bg-[#0A66C2]/10 transition-all"
+                    className="p-2.5 sm:p-3 rounded-lg bg-white/5 text-gray-600 hover:text-[#0A66C2] hover:bg-[#0A66C2]/10 transition-all"
                     title="LinkedIn"
                   >
-                    <Linkedin className="w-5 h-5" />
-        </a>
+                    <Linkedin className="w-4 h-4 sm:w-5 sm:h-5" />
+                  </a>
                   <a 
                     href={resumeData.personal.instagram}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-3 rounded-lg bg-white/5 text-gray-600 hover:text-[#E1306C] hover:bg-[#E1306C]/10 transition-all"
+                    className="p-2.5 sm:p-3 rounded-lg bg-white/5 text-gray-600 hover:text-[#E1306C] hover:bg-[#E1306C]/10 transition-all"
                     title="Instagram"
                   >
-                    <Instagram className="w-5 h-5" />
+                    <Instagram className="w-4 h-4 sm:w-5 sm:h-5" />
                   </a>
                   <a 
                     href="https://github.com/smilebudak"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-3 rounded-lg bg-white/5 text-gray-600 hover:text-gray-900 hover:bg-white/10 transition-all"
+                    className="p-2.5 sm:p-3 rounded-lg bg-white/5 text-gray-600 hover:text-gray-900 hover:bg-white/10 transition-all"
                     title="GitHub"
                   >
-                    <Github className="w-5 h-5" />
-        </a>
-      </div>
+                    <Github className="w-4 h-4 sm:w-5 sm:h-5" />
+                  </a>
+                </div>
               </div>
             </div>
 
             {/* Bottom Bar */}
-            <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
-              <p className="text-gray-600 text-sm">
+            <div className="pt-6 sm:pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-3 sm:gap-4">
+              <p className="text-gray-600 text-xs sm:text-sm text-center md:text-left">
                 {t('footer.copyright', { year: new Date().getFullYear() })}
               </p>
-              <p className="text-gray-700 text-xs font-mono">
+              <p className="text-gray-700 text-[10px] sm:text-xs font-mono text-center md:text-right">
                 {t('footer.builtWith')}
-        </p>
-      </div>
+              </p>
+            </div>
           </div>
         </footer>
       </MainLayout>
@@ -181,13 +181,13 @@ function App() {
       {/* Back to Top Button */}
       <button
         onClick={scrollToTop}
-        className={`fixed bottom-8 right-8 p-3 rounded-full bg-neon-blue text-cyber-black transition-all duration-300 z-50 hover:scale-110 ${
+        className={`fixed bottom-4 right-4 sm:bottom-6 sm:right-6 lg:bottom-8 lg:right-8 p-2.5 sm:p-3 rounded-full bg-neon-blue text-cyber-black transition-all duration-300 z-50 hover:scale-110 ${
           showBackToTop ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
         }`}
         style={{ boxShadow: '0 0 20px rgba(0, 243, 255, 0.3)' }}
         aria-label="Back to top"
       >
-        <ArrowUp className="w-5 h-5" />
+        <ArrowUp className="w-4 h-4 sm:w-5 sm:h-5" />
       </button>
     </>
   );
