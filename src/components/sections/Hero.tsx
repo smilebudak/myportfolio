@@ -138,7 +138,7 @@ export const Hero = () => {
       />
 
       {/* Main Content */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-8 sm:py-12">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-6 sm:py-8 lg:py-12">
         <div className="grid grid-cols-12 gap-4 sm:gap-6 lg:gap-12 items-start">
 
           {/* Text Content */}
@@ -158,12 +158,12 @@ export const Hero = () => {
             <div className="mb-6 sm:mb-8">
               <div className="overflow-hidden">
                 {/* Mobile: Photo on right, name inline */}
-                <div className="lg:hidden flex items-center gap-3 justify-between">
+                <div className="lg:hidden flex items-center gap-2 sm:gap-3 justify-between w-full pr-0">
                   <h1
-                    className="hero-line text-2xl sm:text-3xl font-bold tracking-tighter cursor-default leading-tight flex-1"
+                    className="hero-line text-xl sm:text-2xl md:text-3xl font-bold tracking-tight cursor-default leading-tight flex-1 min-w-0 pr-2"
                     onMouseEnter={() => scrambleText(resumeData.personal.name.split(' ')[0])}
                   >
-                    <span className="text-gray-900 whitespace-nowrap">{t('hero.greeting')} </span>
+                    <span className="text-gray-900">{t('hero.greeting')} </span>
                     <span className="text-gray-900 min-w-[3ch] inline-block">{nameText}</span>
                     {' '}
                     <span className="text-gray-900">{resumeData.personal.name.split(' ')[1]}</span>
@@ -171,11 +171,11 @@ export const Hero = () => {
                   </h1>
                   
                   <div className="flex-shrink-0">
-                    <div className="relative w-16 h-16 sm:w-20 sm:h-20">
+                    <div className="relative w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20">
                       <img 
                         src="/images/ismail.png" 
                         alt="Ismail Budak"
-                        className="w-full h-full rounded-full object-cover aspect-square border-2 sm:border-3 border-gray-200 shadow-md"
+                        className="w-full h-full rounded-full object-cover aspect-square border-2 border-gray-200 shadow-md"
                       />
                     </div>
                   </div>
