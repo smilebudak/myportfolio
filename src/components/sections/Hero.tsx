@@ -139,7 +139,7 @@ export const Hero = () => {
 
       {/* Main Content */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-8 sm:py-12">
-        <div className="grid grid-cols-12 gap-4 sm:gap-6 lg:gap-12 items-center">
+        <div className="grid grid-cols-12 gap-4 sm:gap-6 lg:gap-12 items-start">
 
           {/* Text Content */}
           <div className="col-span-8 sm:col-span-7 lg:col-span-8">
@@ -156,17 +156,30 @@ export const Hero = () => {
 
             {/* Main heading - Large and impactful */}
             <div className="mb-6 sm:mb-8">
-              <div className="overflow-hidden">
-                <h1
-                  className="hero-line text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold tracking-tighter cursor-default leading-tight"
-                  onMouseEnter={() => scrambleText(resumeData.personal.name.split(' ')[0])}
-                >
-                  <span className="text-gray-900">{t('hero.greeting')} </span>
-                  <span className="text-gray-900 min-w-[3ch] inline-block">{nameText}</span>
-                  {' '}
-                  <span className="text-gray-900">{resumeData.personal.name.split(' ')[1]}</span>
-                  <span className="text-gray-900">.</span>
-                </h1>
+              <div className="overflow-hidden flex items-center gap-3 sm:gap-4">
+                <div className="flex-1">
+                  <h1
+                    className="hero-line text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold tracking-tighter cursor-default leading-tight"
+                    onMouseEnter={() => scrambleText(resumeData.personal.name.split(' ')[0])}
+                  >
+                    <span className="text-gray-900">{t('hero.greeting')} </span>
+                    <span className="text-gray-900 min-w-[3ch] inline-block">{nameText}</span>
+                    {' '}
+                    <span className="text-gray-900">{resumeData.personal.name.split(' ')[1]}</span>
+                    <span className="text-gray-900">.</span>
+                  </h1>
+                </div>
+                
+                {/* Profile Photo - Inline with name on mobile */}
+                <div className="lg:hidden flex-shrink-0">
+                  <div className="relative w-20 h-20 sm:w-24 sm:h-24">
+                    <img 
+                      src="/images/ismail.png" 
+                      alt="Ismail Budak"
+                      className="w-full h-full rounded-full object-cover aspect-square border-3 border-gray-200 shadow-md"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -207,9 +220,9 @@ export const Hero = () => {
             </div>
           </div>
 
-          {/* Profile Photo - Mobile & Desktop (Right Side) */}
-          <div className="col-span-4 sm:col-span-5 lg:col-span-4 flex items-center justify-center">
-            <div className="relative hero-cta w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-full lg:h-auto">
+          {/* Profile Photo - Desktop Only (Right Side) */}
+          <div className="hidden lg:flex col-span-4 items-center justify-center">
+            <div className="relative hero-cta w-full h-auto">
               <img 
                 src="/images/ismail.png" 
                 alt="Ismail Budak"
