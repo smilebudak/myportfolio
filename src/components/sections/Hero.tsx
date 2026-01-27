@@ -139,10 +139,10 @@ export const Hero = () => {
 
       {/* Main Content */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-8 sm:py-12">
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <div className="grid grid-cols-12 gap-4 sm:gap-6 lg:gap-12 items-center">
 
           {/* Text Content */}
-          <div className="lg:col-span-8 order-2 lg:order-1">
+          <div className="col-span-8 sm:col-span-7 lg:col-span-8">
             {/* Status indicator */}
             <div className="hero-line flex items-center gap-3 mb-6 sm:mb-8">
               <span className="relative flex h-3 w-3">
@@ -207,9 +207,9 @@ export const Hero = () => {
             </div>
           </div>
 
-          {/* Profile Photo - Mobile & Desktop */}
-          <div className="lg:col-span-4 order-1 lg:order-2 flex items-center justify-center mb-6 lg:mb-0">
-            <div className="relative hero-cta w-32 h-32 sm:w-40 sm:h-40 lg:w-full lg:h-auto">
+          {/* Profile Photo - Mobile & Desktop (Right Side) */}
+          <div className="col-span-4 sm:col-span-5 lg:col-span-4 flex items-center justify-center">
+            <div className="relative hero-cta w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-full lg:h-auto">
               <img 
                 src="/images/ismail.png" 
                 alt="Ismail Budak"
