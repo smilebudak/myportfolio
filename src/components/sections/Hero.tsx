@@ -222,7 +222,7 @@ export const Hero = () => {
               </button>
 
               <a
-                href="https://drive.google.com/uc?export=download&id=1ke97dOjmO_vkqL4RBtynRQsVn8Oal4gi"
+                href="https://drive.google.com/uc?export=download&id=1Lu_JHp-o9TtoF8pKECf44wAXuNmEtBID"
                 target="_blank"
                 rel="noopener noreferrer"
                 download
