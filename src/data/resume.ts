@@ -16,7 +16,7 @@ export const resumeData: ResumeData = {
     school: "Sam Houston State University",
     degree: "Bachelor of Science in Computer Science, Software Engineering",
     graduation: "May 2026",
-    gpa: "3.8"
+    gpa: "3.24"
   },
   experience: [
     {
